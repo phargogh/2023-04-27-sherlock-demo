@@ -8,6 +8,7 @@ import sys
 
 import natcap.invest.sdr.sdr
 import natcap.invest.utils
+from natcap.invest import datastack
 
 LOGGER = logging.getLogger(__name__)
 root_logger = logging.getLogger()
@@ -19,23 +20,8 @@ formatter = logging.Formatter(
 handler.setFormatter(formatter)
 logging.basicConfig(level=logging.INFO, handlers=[handler])
 
-args = {
-    'biophysical_table_path': '',
-    'dem_path': '',
-    'drainage_path': '',
-    'erodibility_path': '',
-    'erosivity_path': '',
-    'ic_0_param': '',
-    'k_param': '',
-    'l_max': '',
-    'lulc_path': '',
-    'n_workers': '',
-    'results_suffix': '',
-    'sdr_max': '',
-    'threshold_flow_accumulation': '',
-    'watersheds_path': '',
-    'workspace_dir': '',
-}
+stack = datastack.extract_parameter_set('datastack.json')
+args = stack.args
 
 if __name__ == '__main__':
     natcap.invest.sdr.sdr.execute(args)
