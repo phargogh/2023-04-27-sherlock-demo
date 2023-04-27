@@ -4,6 +4,7 @@
 # Model: Sediment Delivery Ratio
 
 import logging
+import os
 import sys
 
 import natcap.invest.sdr.sdr
@@ -20,8 +21,9 @@ formatter = logging.Formatter(
 handler.setFormatter(formatter)
 logging.basicConfig(level=logging.INFO, handlers=[handler])
 
-stack = datastack.extract_parameter_set('datastack.json')
+stack = datastack.extract_parameter_set('./SDR/sdr_gura.invs.json')
 args = stack.args
+args['workspace_dir'] = os.getcwd()
 
 if __name__ == '__main__':
     natcap.invest.sdr.sdr.execute(args)
