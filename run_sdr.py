@@ -23,7 +23,8 @@ logging.basicConfig(level=logging.INFO, handlers=[handler])
 
 stack = datastack.extract_parameter_set('./SDR/sdr_gura.invs.json')
 args = stack.args
-args['workspace_dir'] = os.getcwd()
+args['workspace_dir'] = os.path.join(
+    os.environ['SCRATCH'], 'sdr-workspace')
 
 if __name__ == '__main__':
     natcap.invest.sdr.sdr.execute(args)
